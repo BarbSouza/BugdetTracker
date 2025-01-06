@@ -10,8 +10,8 @@
     <!-- Header Section -->
     <header>
         <!-- Displays the title and a brief description -->
-        <h1>Welcome to your Budget Tracker</h1>
-        <p>Manage your finances efficiently!</p>
+        <h1>Wallets</h1>
+        <p></p>
         <nav>
             <ul id="navbar">
                 <li><a href="../frontend/index.html">Home</a></li>
@@ -23,6 +23,28 @@
         </nav>
         
     </header>
+
+    <!-- Main Content Section -->
+    <div class="container">
+
+        <!-- Button to trigger the modal for adding wallets -->
+        <button class="button" id="addWalletBtn">Add Wallet</button>
+
+        <!-- Table for displaying transactions -->
+        <table>
+            <thead>
+                <tr>
+                    <!-- Table headers for wallets attributes -->
+                    <th>Wallet</th>
+                    <th>Amount</th>
+                    
+                </tr>
+            </thead>
+            <tbody id="walletsTableBody">
+                <!-- Placeholder for dynamically added wallets -->
+            </tbody>
+        </table>
+    </div>
 
     <!-- Links the external JavaScript file for interactivity -->
     <script src="../frontend/script.js"></script>
