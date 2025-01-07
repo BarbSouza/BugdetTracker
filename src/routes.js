@@ -1,25 +1,25 @@
 const express = require("express");
-const userController = require("/controllers/userController");
+const userControllers = require("./controllers/userControllers");
 const { connection } = require("./config/database");
 
 const routes = express();
 
-routes.post("/addWallet", userController.addWallet);
+routes.post("/addWallet", userControllers.addWallet);
 
-routes.get("/getWallet", userController.getWallet);
+routes.get("/getWallet", userControllers.getWallet);
 
-routes.delete("/wallets/:id", userController.deleteWallet);
+routes.delete("/wallets/:id", userControllers.deleteWallet);
 
-routes.post("/addCategory", userController.addCategory);
+routes.post("/addCategory", userControllers.addCategory);
 
-routes.get("/getCategory", userController.getCategory);
+routes.get("/getCategory", userControllers.getCategory);
 
-routes.delete("/categories/:id", userController.deleteCategory);
+routes.delete("/categories/:id", userControllers.deleteCategory);
 
-routes.post("/addTransaction", userController.addTransaction);
+routes.post("/addTransaction", userControllers.addTransaction);
 
-routes.get("/getTransaction", userController.getTransaction);
+routes.get("/getTransaction", userControllers.getTransaction);
 
-routes.delete("/transactions/:id", userController.deleteTransaction);
+routes.delete("/transactions/:id", userControllers.deleteTransaction);
 
 module.exports = routes;
