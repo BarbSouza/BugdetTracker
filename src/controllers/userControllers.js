@@ -70,9 +70,9 @@ const deleteTransaction = (req, res) => {
         } else {
             res.status(200).send("Transaction deleted successfully");
         }
-    })
+    });
 
-}
+};
 
 const getWallets = (req, res) => {
     const query = "SELECT wallet_id, wallet_name FROM Wallets";
@@ -98,6 +98,32 @@ const getCategories = (req, res) => {
     });
 };
 
+const deleteWallet = (req, res) => {
+    const walletID = req.params.id;
+    const query = `DELETE FROM Wallets WHERE wallet_id = ?`;
+    connection.query(query, [transactionId], (err, result) => {
+        if (err){
+            console.error("Error deleting wallet:", err);
+            res.status(500).send("Error deleting wallet");
+        } else {
+            res.status(200).send("Wallet deleted successfully");
+        }
+    });
+};
+
+const deleteCategory = (req, res) => {
+    const categoryID = req.params.id;
+    const query = `DELETE FROM Categories WHERE category_id = ?`;
+    connection.query(query, [transactionId], (err, result) => {
+        if (err){
+            console.error("Error deleting category:", err);
+            res.status(500).send("Error deleting category");
+        } else {
+            res.status(200).send("Category deleted successfully");
+        }
+    });
+};
+
 module.exports = {
     addTransaction,
     getTransactions,
@@ -105,5 +131,7 @@ module.exports = {
     addWallet,
     addCategory,
     getCategories,
-    getWallets
+    getWallets,
+    deleteWallet,
+    deleteCategory
 };
