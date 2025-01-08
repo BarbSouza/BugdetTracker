@@ -17,7 +17,7 @@ const connection = mysql.createConnection({
             console.error("Error creating database");
                 throw err;
         } else {
-            console.log("Databse created");
+            console.log("Database created");
         }
 
         connection.query(`USE ${process.env.DB_NAME}`, (err) => {
@@ -43,7 +43,7 @@ const connection = mysql.createConnection({
                 }
             });
 
-        const createCategoriesTable = `CREATE IF NOT EXISTS Categories (
+        const createCategoriesTable = `CREATE TABLE IF NOT EXISTS Categories (
             category_id INT AUTO_INCREMENT PRIMARY KEY,
             category_name VARCHAR(255) NOT NULL
         );`;
@@ -57,7 +57,7 @@ const connection = mysql.createConnection({
             }
         });
 
-        const createTransactionsTable = `CREATE IF NOT EXISTS Transactions (
+        const createTransactionsTable = `CREATE TABLE IF NOT EXISTS Transactions (
             transaction_id INT AUTO_INCREMENT PRIMARY KEY,
             date DATE NOT NULL,
             type VARCHAR(255) NOT NULL,
