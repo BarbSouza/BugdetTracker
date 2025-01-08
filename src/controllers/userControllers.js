@@ -1,6 +1,12 @@
 const path = require("path");
 const { connection } = require("../config/database");
 
+
+const form = (req, res) => {
+    res.sendFile(path.join(__dirname, "../frontend/index.html"));
+  };
+  
+
 const addWallet = (req, res) => {
     const { walletName, initialBalance } = req.body;
 
@@ -125,6 +131,7 @@ const deleteCategory = (req, res) => {
 };
 
 module.exports = {
+    form,
     addTransaction,
     getTransactions,
     deleteTransaction,
