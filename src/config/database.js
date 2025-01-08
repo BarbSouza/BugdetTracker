@@ -20,7 +20,7 @@ const connection = mysql.createConnection({
             console.log("Databse created");
         }
 
-        connection.query("USE BudgetTracker_DB", (err) => {
+        connection.query(`USE ${process.env.DB_NAME}`, (err) => {
             if(err) {
                 console.error("Error using the created DB");
                 throw err;
