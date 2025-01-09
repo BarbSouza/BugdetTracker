@@ -1,10 +1,28 @@
-document.addEventListener('DOMContentLoaded', () => {
-    const currentPath = window.location.pathname;
-    const navLinks = document.querySelectorAll('#navbar a');
+//function to show a modal by setting its display to "block"
+function showModal(modalId) {
+    document.getElementById(modalId).style.display = "block";
+};
 
-    navLinks.forEach(link => {
-        if (link.href.includes(currentPath)) {
-            link.parentElement.classList.add('active');
-        }
+//function to close a modal by setting its display to "none"
+function closeModal(modalId) {
+document.getElementById(modalId).style.display = "none";
+};
+
+//EventListener to display the "Add Transaction" modal when the button in clicked
+document.getElementById("addTransactionBtn").addEventListener("click", function () {
+    showModal("addTransactionModal");
+});
+
+//Adds event listeners to all "edit" buttons to show the "Delete Transaction" modal dynamically
+document.querySelectorAll(".edit-btn").forEach((button) => {
+    button.addEventListener("click", function () {
+        showModal("editTransactionModal");
+    });
+});
+
+//Adds event listeners to all "delete" buttons to show the "Delete Transaction" modal dynamically
+document.querySelectorAll(".delete-btn").forEach((button) => {
+    button.addEventListener("click", function () {
+        showModal("deleteTransactionModal");
     });
 });
