@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Budget Tracker</title>
+    <!-- Links the stylesheet for page styling -->
+    <link rel="stylesheet" href="../frontend/style.css" type="text/css">
+  </head>
+  <body>
+    <!-- Header Section -->
+    <header>
+        <!-- Displays the title and a brief description -->
+        <h1>Report</h1>
+        <p></p>
+        <nav>
+            <ul id="navbar">
+                <li><a href="../frontend/index.html">Home</a></li>
+                <li><a href="../frontend/transactions.html">Transactions</a></li>
+                <li><a href="../frontend/wallets.html">Wallets</a></li>
+                <li><a href="../frontend/categories.html">Categories</a></li>
+                <li><a href="../frontend/reports.html">Reports</a></li>
+            </ul>
+        </nav>
+        
+    </header>
+
+    <!-- Main Content Section -->
+    <div class="container">
+
+        <!-- Button to trigger the modal for ... -->
+        <button class="button" id="reportBtn">Filter</button>
+
+        <!-- Table for displaying transactions -->
+        <table>
+            <thead>
+                <tr>
+                    <!-- Table headers for report attributes -->
+                    <th>Month</th>
+                    <th>Capital</th>
+                    <th>Incomes</th>
+                    <th>Expenses</th>
+                    <th>Saved</th>
+                </tr>
+            </thead>
+            <tbody id="reportsTableBody">
+                <!-- Placeholder for dynamically added wallets -->
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Links the external JavaScript file for interactivity -->
+    <script src="../frontend/script.js"></script>
+  </body>
+</html>
