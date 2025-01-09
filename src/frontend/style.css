@@ -40,7 +40,7 @@ header {
 
 #navbar a:hover {
     background-color: white;
-    color: #6a11cb;
+    color: #4420c7;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
@@ -63,7 +63,7 @@ header {
 }
 
 .button {
-    background-color: #6a11cb;
+    background-color: #4420c7;
     color: white;
     padding: 10px 15px;
     border: none;
@@ -135,7 +135,7 @@ header {
     width: 100%;
     padding: 10px;
     border: none;
-    background: #6a11cb;
+    background: #4420c7;
     color: white;
     border-radius: 5px;
     cursor: pointer;
@@ -157,6 +157,14 @@ th, td {
 }
 
 th {
-    background-color: #6a11cb;
+    background-color: #4420c7;
     color: white;
+}
+
+#content {
+    text-align: center;
+}
+
+#content h1 {
+    color: #4420c7;
 }
