@@ -18,7 +18,7 @@ header {
 #navbar {
     display: flex;
     justify-content: center;
-    background: linear-gradient(to right, #2575fc, #6a11cb);
+    
     list-style: none;
     margin: 0;
     padding: 10px 0;
@@ -44,10 +44,6 @@ header {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-#navbar .active a {
-    background-color: #fff;
-    color: #6a11cb;
-}
 
 /* Responsive Design for Navbar */
 @media (max-width: 768px) {
