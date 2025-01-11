@@ -46,6 +46,27 @@
         </table>
     </div>
 
+     <!-- Modal for Adding a New Wallet -->
+     <div class="modal" id="addWalletModal">
+        <div class="modal-content">
+            <!-- Close button for the modal -->
+            <span class="close-btn" onclick="closeModal(`addWalletModal`)">&times;</span>
+            <!-- Modal title -->
+            <div class="modal-header">Add Wallet</div>
+            <!-- Form to submit wallet details -->
+             <form action="/addWallet" method="POST">
+                <!-- Input fields for wallet details -->
+                <label>Wallet Name:</label><br>
+                <input type="text" id="walletName" name="walletName" placeholder="Wallet Name" required><br><br>
+
+                <label>Initial Balance</label><br>
+                <input type="number" id="initialBalance" name="initialBalance" placeholder="Initial Balance" required><br><br>
+                <!-- Button to save the transaction -->
+                <button type="submit" class="button">Save</button>
+             </form>
+        </div>
+    </div>
+
     <!-- Links the external JavaScript file for interactivity -->
     <script src="../frontend/script.js"></script>
   </body>
