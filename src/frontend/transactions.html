@@ -33,6 +33,10 @@
         <!-- Button to trigger the modal for adding wallets -->
         <button class="button" id="addWalletBtn">Add Wallet</button>
 
+        <!-- Button to trigger the modal for adding wallets -->
+        <button class="button" id="addCategoryBtn">Add Category</button>
+
+
         <!-- Table for displaying transactions -->
         <table>
             <thead>
@@ -113,6 +117,25 @@
     
                     <label>Initial Balance</label><br>
                     <input type="number" id="initialBalance" name="initialBalance" placeholder="Initial Balance" required><br><br>
+                    <!-- Button to save the transaction -->
+                    <button type="submit" class="button">Save</button>
+                 </form>
+            </div>
+        </div>
+
+        <!-- Modal for Adding a New Category -->
+        <div class="modal" id="addCategoryModal">
+            <div class="modal-content">
+                <!-- Close button for the modal -->
+                <span class="close-btn" onclick="closeModal(`addCategoryModal`)">&times;</span>
+                <!-- Modal title -->
+                <div class="modal-header">Add Category</div>
+                <!-- Form to submit wallet details -->
+                 <form action="/addCategory" method="POST">
+                    <!-- Input fields for wallet details -->
+                    <label>Category Name:</label><br>
+                    <input type="text" id="categoryName" name="categoryName" placeholder="Category Name" required><br><br>
+    
                     <!-- Button to save the transaction -->
                     <button type="submit" class="button">Save</button>
                  </form>
