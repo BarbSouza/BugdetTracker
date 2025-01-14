@@ -30,7 +30,7 @@ const addCategory = (req, res) => {
             return res.status(500).send("Error adding category");
         }
         
-        res.sendFile(pathjoin(__dirname, "../frontend/categories.html"));
+        res.sendFile(path.join(__dirname, "../frontend/categories.html"));
 
     });
 };
