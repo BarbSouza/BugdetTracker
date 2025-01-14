@@ -30,13 +30,6 @@
         <!-- Button to trigger the modal for adding transactions -->
         <button class="button" id="addTransactionBtn">Add Transaction</button>
 
-        <!-- Button to trigger the modal for adding wallets -->
-        <button class="button" id="addWalletBtn">Add Wallet</button>
-
-        <!-- Button to trigger the modal for adding wallets -->
-        <button class="button" id="addCategoryBtn">Add Category</button>
-
-
         <!-- Table for displaying transactions -->
         <table>
             <thead>
@@ -102,47 +95,8 @@
         </div>
     </div>
 
-         <!-- Modal for Adding a New Wallet -->
-         <div class="modal" id="addWalletModal">
-            <div class="modal-content">
-                <!-- Close button for the modal -->
-                <span class="close-btn" onclick="closeModal(`addWalletModal`)">&times;</span>
-                <!-- Modal title -->
-                <div class="modal-header">Add Wallet</div>
-                <!-- Form to submit wallet details -->
-                 <form action="/addWallet" method="POST">
-                    <!-- Input fields for wallet details -->
-                    <label>Wallet Name:</label><br>
-                    <input type="text" id="walletName" name="walletName" placeholder="Wallet Name" required><br><br>
-    
-                    <label>Initial Balance</label><br>
-                    <input type="number" id="initialBalance" name="initialBalance" placeholder="Initial Balance" required><br><br>
-                    <!-- Button to save the transaction -->
-                    <button type="submit" class="button">Save</button>
-                 </form>
-            </div>
-        </div>
-
-        <!-- Modal for Adding a New Category -->
-        <div class="modal" id="addCategoryModal">
-            <div class="modal-content">
-                <!-- Close button for the modal -->
-                <span class="close-btn" onclick="closeModal(`addCategoryModal`)">&times;</span>
-                <!-- Modal title -->
-                <div class="modal-header">Add Category</div>
-                <!-- Form to submit wallet details -->
-                 <form action="/addCategory" method="POST">
-                    <!-- Input fields for wallet details -->
-                    <label>Category Name:</label><br>
-                    <input type="text" id="categoryName" name="categoryName" placeholder="Category Name" required><br><br>
-    
-                    <!-- Button to save the transaction -->
-                    <button type="submit" class="button">Save</button>
-                 </form>
-            </div>
-        </div>
 
     <!-- Links the external JavaScript file for interactivity -->
-    <script src="../frontend/script.js"></script>
+    <script src="../frontend/script_transactions.js"></script>
   </body>
 </html>
