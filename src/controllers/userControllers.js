@@ -16,7 +16,7 @@ const addWallet = (req, res) => {
             console.error("Error adding wallet:", err);
             return res.status(500).send("Error adding wallet");
         }
-        res.sendFile(path.join(__dirname, "../frontend/wallets.html"))
+        res.redirect("../frontend/wallets.html");
     });
 };
 
@@ -30,7 +30,7 @@ const addCategory = (req, res) => {
             return res.status(500).send("Error adding category");
         }
         
-        res.sendFile(path.join(__dirname, "../frontend/categories.html"));
+        res.redirect("../frontend/categories.html");
 
     });
 };
@@ -44,7 +44,7 @@ const addTransaction = (req, res) => {
         if (err) {
             console.error("Error inserting transaction:", err);
         }
-        res.sendFile(path.join(__dirname, "../frontend/transactions.html"));
+        res.redirect("../frontend/transactions.html");
     });
 
 };
