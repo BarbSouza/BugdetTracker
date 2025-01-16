@@ -27,35 +27,45 @@ document.querySelectorAll(".delete-btn").forEach((button) => {
     });
 });
 
-// Fetches wallets from the server and displays them in a dropdown
-document.addEventListener("DOMContentLoaded", () => {
-    fetch("/getWallet")
+function populateDropdown(endpoint, dropdownId, placeholderText = "Select an option") {
+  fetch(endpoint)
       .then((response) => {
-        if (!response.ok) {
-          throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-        return response.json();
+          if (!response.ok) {
+              throw new Error(`HTTP error! Status: ${response.status}`);
+          }
+          return response.json();
       })
-      .then((wallets) => {
-        const walletDropdown = document.getElementById("walletDropdown");
-        walletDropdown.innerHTML = ""; // Clear previous options
-  
-        if (wallets.length === 0) {
-          // If no wallets, show a placeholder option
-          const placeholderOption = document.createElement("option");
-          placeholderOption.textContent = "No wallets available";
-          placeholderOption.disabled = true;
-          placeholderOption.selected = true;
-          walletDropdown.appendChild(placeholderOption);
-        } else {
-          // Populate the dropdown with wallet options
-          wallets.forEach((wallet) => {
-            const option = document.createElement("option");
-            option.value = wallet.wallet_id;
-            option.textContent = wallet.wallet_name;
-            walletDropdown.appendChild(option);
-          });
-        }
+      .then((data) => {
+          const dropdown = document.getElementById(dropdownId);
+          dropdown.innerHTML = ""; // Clear previous options
+
+          if (data.length === 0) {
+              // If no items, show a placeholder option
+              const placeholderOption = document.createElement("option");
+              placeholderOption.textContent = placeholderText;
+              placeholderOption.disabled = true;
+              placeholderOption.selected = true;
+              dropdown.appendChild(placeholderOption);
+          } else {
+              // Populate the dropdown with options
+              data.forEach((item) => {
+                  const option = document.createElement("option");
+                  option.value = item.category_id || item.wallet_id; // Dynamically handle IDs
+                  option.textContent = item.category_name || item.wallet_name; // Dynamically handle names
+                  dropdown.appendChild(option);
+              });
+          }
       })
-      .catch((error) => console.error("Error fetching wallets:", error));
-  });
+      .catch((error) => {
+          console.error(`Error fetching data from ${endpoint}:`, error);
+          alert(`Failed to fetch data. Please try again later.`);
+      });
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  //populate the wallet dropdown
+  populateDropdown("/getWallet", "walletDropdown", "No wallets avilable");
+
+  //Populate the categories dropdown
+  populateDropdown("/getCategory", "categoriesDropdown", "No categories available");
+})
