@@ -29,7 +29,7 @@ document.querySelectorAll(".delete-btn").forEach((button) => {
 
 // Fetches wallets from the server and displays them in a dropdown
 document.addEventListener("DOMContentLoaded", () => {
-    fetch("/wallets")
+    fetch("/getWallet")
       .then((response) => {
         if (!response.ok) {
           throw new Error(`HTTP error! Status: ${response.status}`);
