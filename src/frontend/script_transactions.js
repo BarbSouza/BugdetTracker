@@ -69,3 +69,78 @@ document.addEventListener("DOMContentLoaded", () => {
   //Populate the categories dropdown
   populateDropdown("/getCategory", "categoriesDropdown", "No categories available");
 })
+
+function fetchAndDisplayTransactions() {
+  let totalAmount = 0; // Initialize total
+
+  // Fetch wallet data
+  fetch('/getWallet')
+      .then(walletResponse => walletResponse.json())
+      .then(wallets => {
+          console.log("Wallets fetched:", wallets); // Debugging
+
+          // Sum up all wallets' initial balances
+          wallets.forEach(wallet => {
+              const walletBalance = parseFloat(wallet.initial_balance) || 0; // Ensure it's a number
+              totalAmount += walletBalance;
+              console.log(`Wallet ID: ${wallet.wallet_id}, Initial Balance: ${walletBalance}, Running Total: ${totalAmount}`); // Debugging
+          });
+
+          // Fetch transaction data
+          fetch('/getTransaction')
+              .then(transactionResponse => transactionResponse.json())
+              .then(transactions => {
+                  console.log("Transactions fetched:", transactions); // Debugging
+                  const tableBody = document.getElementById("transactionTableBody");
+                  tableBody.innerHTML = ""; // Clear existing rows
+
+                  // Add transactions to the table and update the total
+                  transactions.forEach(transaction => {
+                      const row = document.createElement("tr");
+
+                      const transactionAmount = parseFloat(transaction.amount) || 0; // Ensure it's a number
+                      if (transaction.type === "Income") {
+                          totalAmount += transactionAmount;
+                      } else if (transaction.type === "Expense") {
+                          totalAmount -= transactionAmount;
+                      }
+
+                      // Add transaction row to the table
+                      row.innerHTML = `
+                          <td>${new Date(transaction.date).toLocaleDateString("en-GB", {
+                              day: "2-digit",
+                              month: "2-digit",
+                              year: "numeric",
+                          })}</td>
+                          <td>${transaction.type}</td>
+                          <td>${transaction.Wallet}</td>
+                          <td>${transaction.Category}</td>
+                          <td>${transaction.description}</td>
+                          <td>${transactionAmount.toFixed(2)}</td>
+                          <td>
+                              <button class="button edit-btn" data-id="${transaction.transaction_id}">Edit</button>
+                              <button class="button delete-btn" data-id="${transaction.transaction_id}">Delete</button>
+                          </td>
+                      `;
+                      tableBody.appendChild(row);
+                  });
+
+                  // Add a row for the total
+                  const totalRow = document.createElement("tr");
+                  totalRow.innerHTML = `
+                      <td colspan="5" style="font-weight: bold; text-align: right;">Total</td>
+                      <td style="font-weight: bold;">${totalAmount.toFixed(2)}</td>
+                  `;
+                  tableBody.appendChild(totalRow);
+              })
+              .catch(err => {
+                  console.error("Error fetching transactions:", err);
+              });
+      })
+      .catch(err => {
+          console.error("Error fetching wallets:", err);
+      });
+}
+
+// Call the function when the page loads
+document.addEventListener("DOMContentLoaded", fetchAndDisplayTransactions);
