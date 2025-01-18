@@ -8,10 +8,10 @@ const form = (req, res) => {
   
 
 const addWallet = (req, res) => {
-    const { walletName, initialBalance } = req.body;
+    const { walletName } = req.body;
 
-    const query = "INSERT INTO Wallets (wallet_name, initial_balance) VALUES (?, ?)";
-    connection.query(query, [walletName, initialBalance], (err) => {
+    const query = "INSERT INTO Wallets (wallet_name) VALUES (?)";
+    connection.query(query, [walletName], (err) => {
         if (err) {
             console.error("Error adding wallet:", err);
             return res.status(500).send("Error adding wallet");
@@ -69,7 +69,7 @@ const getTransactions = (req, res) => {
 const deleteTransaction = (req, res) => {
     const transactionID = req.params.id;
     const query = `DELETE FROM Transactions WHERE transaction_id = ?`;
-    connection.query(query, [transactionId], (err, result) => {
+    connection.query(query, [transactionID], (err, result) => {
         if (err){
             console.error("Error deleting transaction:", err);
             res.status(500).send("Error deleting transaction");
@@ -107,7 +107,7 @@ const getCategories = (req, res) => {
 const deleteWallet = (req, res) => {
     const walletID = req.params.id;
     const query = `DELETE FROM Wallets WHERE wallet_id = ?`;
-    connection.query(query, [transactionId], (err, result) => {
+    connection.query(query, [walletID], (err, result) => {
         if (err){
             console.error("Error deleting wallet:", err);
             res.status(500).send("Error deleting wallet");
@@ -120,7 +120,7 @@ const deleteWallet = (req, res) => {
 const deleteCategory = (req, res) => {
     const categoryID = req.params.id;
     const query = `DELETE FROM Categories WHERE category_id = ?`;
-    connection.query(query, [transactionId], (err, result) => {
+    connection.query(query, [categoryID], (err, result) => {
         if (err){
             console.error("Error deleting category:", err);
             res.status(500).send("Error deleting category");
