@@ -26,3 +26,53 @@ document.querySelectorAll(".delete-btn").forEach((button) => {
         showModal("deleteTransactionModal");
     });
 });
+
+window.onload = () => {
+    fetch("/getWalletsTotals")
+        .then((response) => response.json())
+        .then((wallets) => {
+            const walletsTableBody = document.getElementById("walletsTableBody");
+            walletsTableBody.innerHTML = ""; // Clear existing rows
+            
+            let totalSum = 0; // Initialize the total sum of all wallets
+
+            wallets.forEach((wallet) => {
+                const row = document.createElement("tr");
+
+                // Create table cells
+                const walletNameCell = document.createElement("td");
+                walletNameCell.textContent = wallet.wallet_name;
+
+                const totalAmountCell = document.createElement("td");
+                totalAmountCell.textContent = `$${wallet.total_amount.toFixed(2)}`;
+
+                // Append cells to row
+                row.appendChild(walletNameCell);
+                row.appendChild(totalAmountCell);
+
+                // Append row to table body
+                walletsTableBody.appendChild(row);
+
+                // Add to total sum
+                totalSum += wallet.total_amount;
+            });
+
+            // Add a row for the total sum
+            const totalRow = document.createElement("tr");
+            totalRow.classList.add("total-row"); // Optional: Style the total row differently
+
+            const totalLabelCell = document.createElement("td");
+            totalLabelCell.textContent = "Total";
+            totalLabelCell.style.fontWeight = "bold"; // Optional: Emphasize the total label
+
+            const totalSumCell = document.createElement("td");
+            totalSumCell.textContent = `$${totalSum.toFixed(2)}`;
+            totalSumCell.style.fontWeight = "bold"; // Optional: Emphasize the total amount
+
+            totalRow.appendChild(totalLabelCell);
+            totalRow.appendChild(totalSumCell);
+
+            walletsTableBody.appendChild(totalRow);
+        })
+        .catch((err) => console.error("Error fetching wallets with totals:", err));
+}

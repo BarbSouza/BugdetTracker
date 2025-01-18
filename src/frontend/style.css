@@ -168,3 +168,9 @@ th {
 #content h1 {
     color: #4420c7;
 }
+
+.total-row {
+    background-color: #f2f2f2; /* Light gray background for emphasis */
+    font-weight: bold;        /* Bold text */
+    text-align: right;        /* Align text to the right */
+}
