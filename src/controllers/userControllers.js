@@ -158,6 +158,34 @@ const getWalletsTotals = (req, res) => {
     });
 };
 
+const getCategoriesTotals = (req, res) => {
+    const query = `
+        SELECT 
+            c.category_id, 
+            c.category_name, 
+            IFNULL(SUM(CASE 
+                WHEN t.type = 'income' THEN t.amount 
+                WHEN t.type = 'expense' THEN -t.amount 
+                ELSE 0 
+            END), 0) AS total_amount
+        FROM 
+            Categories c
+        LEFT JOIN 
+            Transactions t 
+        ON 
+            c.category_id = t.category_id
+        GROUP BY 
+            c.category_id, c.category_name;
+    `;
+    connection.query(query, (err, results) => {
+        if (err) {
+            console.error("Error fetching categories with totals:", err);
+            return res.status(500).send("Error fetching categories with totals");
+        }
+        res.json(results);
+    });
+};
+
 module.exports = {
     form,
     addTransaction,
@@ -169,5 +197,6 @@ module.exports = {
     getWallets,
     deleteWallet,
     deleteCategory,
-    getWalletsTotals
+    getWalletsTotals,
+    getCategoriesTotals
 };

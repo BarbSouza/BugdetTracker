@@ -24,6 +24,8 @@ routes.get("/getTransaction", userControllers.getTransactions);
 
 routes.delete("/transactions/:id", userControllers.deleteTransaction);
 
-routes.get("/getWalletsTotals", userControllers.getWalletsTotals)
+routes.get("/getWalletsTotals", userControllers.getWalletsTotals);
+
+routes.get("/getCategoriesTotals", userControllers.getCategoriesTotals);
 
 module.exports = routes;
