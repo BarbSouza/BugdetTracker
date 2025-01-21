@@ -142,5 +142,41 @@ function fetchAndDisplayTransactions() {
       });
 }
 
-// Call the function when the page loads
+
+// Attach event listeners dynamically using delegation
+document.addEventListener("click", (event) => {
+    // Handle "Delete" button click to open the delete modal
+    if (event.target.classList.contains("delete-btn")) {
+        const transactionID = event.target.getAttribute("data-id");
+        showModal("deleteTransactionModal");
+
+        // Set the transaction ID on the confirm delete button
+        const deleteConfirmButton = document.querySelector("#deleteTransactionModal .delButton");
+        deleteConfirmButton.setAttribute("data-id", transactionID);
+    }
+
+    // Handle "Yes" button click inside the delete modal to delete the transaction
+    if (event.target.classList.contains("delButton")) {
+        const transactionID = event.target.getAttribute("data-id");
+
+        // Sends a DELETE request to remove a transaction
+        fetch(`/transactions/${transactionID}`, {
+            method: "DELETE",
+        })
+        .then((response) => {
+            if (response.ok) {
+                closeModal("deleteTransactionModal");
+                fetchAndDisplayTransactions();
+                console.log("Transaction deleted successfully");
+            } else {
+                console.error("Failed to delete transaction");
+            }
+        })
+        .catch((error) =>
+            console.error("Error deleting transaction:", error),
+        );
+    }
+  });
+
+  // Call the function when the page loads
 document.addEventListener("DOMContentLoaded", fetchAndDisplayTransactions);
