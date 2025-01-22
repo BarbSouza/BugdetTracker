@@ -20,13 +20,6 @@ document.querySelectorAll(".edit-btn").forEach((button) => {
     });
 });
 
-//Adds event listeners to all "delete" buttons to show the "Delete Transaction" modal dynamically
-document.querySelectorAll(".delete-btn").forEach((button) => {
-    button.addEventListener("click", function () {
-        showModal("deleteTransactionModal");
-    });
-});
-
 function populateDropdown(endpoint, dropdownId, placeholderText = "Select an option") {
   fetch(endpoint)
       .then((response) => {
