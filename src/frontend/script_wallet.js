@@ -16,16 +16,10 @@ document.getElementById("addWalletBtn").addEventListener("click", function () {
 //Adds event listeners to all "edit" buttons to show the "Delete Transaction" modal dynamically
 document.querySelectorAll(".edit-btn").forEach((button) => {
     button.addEventListener("click", function () {
-        showModal("editTransactionModal");
+        showModal("editWalletModal");
     });
 });
 
-//Adds event listeners to all "delete" buttons to show the "Delete Transaction" modal dynamically
-document.querySelectorAll(".delete-btn").forEach((button) => {
-    button.addEventListener("click", function () {
-        showModal("deleteTransactionModal");
-    });
-});
 
 window.onload = () => {
     fetch("/getWalletsTotals")
@@ -46,9 +40,27 @@ window.onload = () => {
                 const totalAmountCell = document.createElement("td");
                 totalAmountCell.textContent = `$${wallet.total_amount.toFixed(2)}`;
 
+                const deleteWalletCell = document.createElement("td");
+                const deleteButton = document.createElement("button");
+                deleteButton.textContent = "Delete";
+                deleteButton.classList.add("button", "delbutton");
+                deleteButton.setAttribute("data-id", wallet.wallet_id); 
+
+                //Adds event listeners to all "delete" buttons to show the "Delete Transaction" modal dynamically
+                
+                deleteButton.addEventListener("click", function () {
+                        showModal("deleteWalletModal");
+
+                        const deleteConfirmButton = document.querySelector("#deleteWalletModal .confirm-delete-btn");
+                        deleteConfirmButton.setAttribute("data-id", wallet.wallet_id);
+                });
+
+                deleteWalletCell.appendChild(deleteButton);
+
                 // Append cells to row
                 row.appendChild(walletNameCell);
                 row.appendChild(totalAmountCell);
+                row.appendChild(deleteWalletCell);
 
                 // Append row to table body
                 walletsTableBody.appendChild(row);
