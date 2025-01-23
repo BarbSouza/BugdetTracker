@@ -111,8 +111,8 @@ function fetchAndDisplayTransactions() {
                           <td>${transaction.description}</td>
                           <td>${transactionAmount.toFixed(2)}</td>
                           <td>
-                              <button class="button edit-btn" data-id="${transaction.transaction_id}">Edit</button>
                               <button class="button delete-btn" data-id="${transaction.transaction_id}">Delete</button>
+                              <button class="button edit-btn" data-id="${transaction.transaction_id}">Edit</button>
                           </td>
                       `;
                       tableBody.appendChild(row);

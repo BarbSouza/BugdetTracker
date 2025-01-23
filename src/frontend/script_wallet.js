@@ -55,12 +55,27 @@ window.onload = () => {
                         deleteConfirmButton.setAttribute("data-id", wallet.wallet_id);
                 });
 
+                const editWalletCell = document.createElement("td");
+                const editButton = document.createElement("button");
+                editButton.textContent = "Edit";
+                editButton.classList.add("button", "editButton");
+                editButton.setAttribute("data-id", wallet.wallet_id); 
+
+                //Adds event listeners to all "delete" buttons to show the "Delete Transaction" modal dynamically
+                
+                deleteButton.addEventListener("click", function () {
+                        showModal("editWalletModal");
+
+                });
+
                 deleteWalletCell.appendChild(deleteButton);
+                editWalletCell.appendChild(editButton);
 
                 // Append cells to row
                 row.appendChild(walletNameCell);
                 row.appendChild(totalAmountCell);
                 row.appendChild(deleteWalletCell);
+                row.appendChild(editWalletCell);
 
                 // Append row to table body
                 walletsTableBody.appendChild(row);
