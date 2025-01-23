@@ -13,12 +13,6 @@ document.getElementById("addWalletBtn").addEventListener("click", function () {
     showModal("addWalletModal");
 });
 
-//Adds event listeners to all "edit" buttons to show the "Delete Transaction" modal dynamically
-document.querySelectorAll(".edit-btn").forEach((button) => {
-    button.addEventListener("click", function () {
-        showModal("editWalletModal");
-    });
-});
 
 
 window.onload = () => {
@@ -63,8 +57,11 @@ window.onload = () => {
 
                 //Adds event listeners to all "delete" buttons to show the "Delete Transaction" modal dynamically
                 
-                deleteButton.addEventListener("click", function () {
+                editButton.addEventListener("click", function () {
                         showModal("editWalletModal");
+
+                        const editConfirmButton = document.querySelector("#editWalletModal .confirm-edit-btn");
+                        editConfirmButton.setAttribute("data-id", wallet.wallet_id);
 
                 });
 

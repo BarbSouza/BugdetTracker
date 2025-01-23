@@ -69,9 +69,29 @@
         <div class="modal-content">
             <!-- Close button for the modal -->
              <span class="close-btn" onclick="closeModal('deleteWalletModal')">&times;</span>
+             <!-- Modal title -->
+            <div class="modal-header">Delete Wallet</div>
              <label>Are you sure you want to delete this Wallet?</label><br><br>
              <button class="button" onclick="closeModal('deleteWalletModal')">No</button><br><br>
              <button class="delButton">Yes</button>
+        </div>
+    </div>
+
+     <!-- Modal for Adding a New Wallet -->
+     <div class="modal" id="editWalletModal">
+        <div class="modal-content">
+            <!-- Close button for the modal -->
+            <span class="close-btn" onclick="closeModal(`editWalletModal`)">&times;</span>
+            <!-- Modal title -->
+            <div class="modal-header">Edit Wallet</div>
+            <!-- Form to submit wallet details -->
+             <form action="/editWallet" method="POST">
+                <!-- Input fields for wallet details -->
+                <label>New Wallet Name:</label><br>
+                <input type="text" id="newWalletName" name="walletName" placeholder="Wallet Name" required><br><br>
+
+                <button type="submit" class="button">Save Chages</button>
+             </form>
         </div>
     </div>
 
