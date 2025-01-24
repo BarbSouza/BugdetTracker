@@ -106,6 +106,52 @@
         </div>
     </div>
 
+    <!-- Modal for editing a Transaction -->
+    <div class="modal" id="editTransactionModal">
+        <div class="modal-content">
+            <!-- Close button for the modal -->
+            <span class="close-btn" onclick="closeModal(`editTransactionModal`)">&times;</span>
+            <!-- Modal title -->
+            <div class="modal-header">Edit Transaction</div>
+            <!-- Form to submit transaction details -->
+             <form action="/editTransaction" method="POST">
+                <!-- Input fields for transaction details -->
+                <label for="date">Date:</label><br>
+                <input type="date" id="date" name="date" required><br><br>
+
+                <!-- Dropdown for selecting transaction type -->
+                <label>Type:</label><br>
+                <select id="type" name="type" required>
+                    <option value="Income">Income</option>
+                    <option value="Expense">Expense</option>
+                </select><br><br>
+
+                <!-- Dropdown for selecting the wallet -->
+                <label>Wallet:</label><br>
+                <select id="walletDropdown" name="wallet_id" required>
+                  <!-- Options will be dynamically populated -->
+                </select><br><br>
+
+                <!-- Input for transaction category -->
+                <label>Category:</label><br>
+                <select id="categoriesDropdown" name="category_id" required><br><br>
+                <!-- Options will be dynamically populated -->
+                </select><br><br>
+
+                <!-- Input for adding a transaction description -->
+                <label>Description:</label><br>
+                <input type="text" id="description" name="description" placeholder="Description" required><br><br>
+
+                <!-- Input for transaction value -->
+                <label>Amount:</label><br>
+                <input type="number" id="amount" name="amount" placeholder="Amount" step="any" required><br><br>
+
+                <!-- Button to save the transaction -->
+                <button type="edit" class="edit-button">Save</button>
+             </form>
+        </div>
+    </div>
+
 
     <!-- Links the external JavaScript file for interactivity -->
     <script src="../frontend/script_transactions.js"></script>
