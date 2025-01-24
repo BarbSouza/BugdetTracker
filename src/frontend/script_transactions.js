@@ -13,12 +13,6 @@ document.getElementById("addTransactionBtn").addEventListener("click", function 
     showModal("addTransactionModal");
 });
 
-//Adds event listeners to all "edit" buttons to show the "Delete Transaction" modal dynamically
-document.querySelectorAll(".edit-btn").forEach((button) => {
-    button.addEventListener("click", function () {
-        showModal("editTransactionModal");
-    });
-});
 
 function populateDropdown(endpoint, dropdownId, placeholderText = "Select an option") {
   fetch(endpoint)
@@ -167,6 +161,41 @@ document.addEventListener("click", (event) => {
         })
         .catch((error) =>
             console.error("Error deleting transaction:", error),
+        );
+    }
+  });
+
+  // Attach event listeners dynamically using delegation
+document.addEventListener("click", (event) => {
+    // Handle "Edit" button click to open the delete modal
+    if (event.target.classList.contains("edit-btn")) {
+        const transactionID = event.target.getAttribute("data-id");
+        showModal("editTransactionModal");
+
+        // Set the transaction ID on the confirm delete button
+        const editSaveButton = document.querySelector("#editTransactionModal .editButton");
+        editSaveButton.setAttribute("data-id", transactionID);
+    }
+
+    // Handle "Yes" button click inside the delete modal to delete the transaction
+    if (event.target.classList.contains("editButton")) {
+        const transactionID = event.target.getAttribute("data-id");
+
+        // Sends a DELETE request to remove a transaction
+        fetch(`/transactions/${transactionID}`, {
+            method: "EDIT",
+        })
+        .then((response) => {
+            if (response.ok) {
+                closeModal("editTransactionModal");
+                fetchAndDisplayTransactions();
+                console.log("Transaction edited successfully");
+            } else {
+                console.error("Failed to edit transaction");
+            }
+        })
+        .catch((error) =>
+            console.error("Error editing transaction:", error),
         );
     }
   });
