@@ -46,9 +46,46 @@ window.onload = () => {
             const totalAmountCell = document.createElement("td");
             totalAmountCell.textContent = `$${category.total_amount.toFixed(2)}`;
 
+            const deleteCategoryCell = document.createElement("td");
+            const deleteButton = document.createElement("button");
+            deleteButton.textContent = "Delete";
+            deleteButton.classList.add("button", "delbutton");
+            deleteButton.setAttribute("data-id", category.category_id); 
+
+            //Adds event listeners to all "delete" buttons to show the "Delete Transaction" modal dynamically
+                
+            deleteButton.addEventListener("click", function () {
+                showModal("deleteCategoryModal");
+
+                const deleteConfirmButton = document.querySelector("#deleteCategoryModal .confirm-delete-btn");
+                deleteConfirmButton.setAttribute("data-id", category.category_id);
+            });
+
+                const editCategoryCell = document.createElement("td");
+                const editButton = document.createElement("button");
+                editButton.textContent = "Edit";
+                editButton.classList.add("button", "editButton");
+                editButton.setAttribute("data-id", category.category_id); 
+
+                //Adds event listeners to all "delete" buttons to show the "Delete Transaction" modal dynamically
+                
+                editButton.addEventListener("click", function () {
+                        showModal("editCategoryModal");
+
+                        const editConfirmButton = document.querySelector("#editCategoryModal .confirm-edit-btn");
+                        editConfirmButton.setAttribute("data-id", category.category_id);
+
+                });
+
+                deleteCategoryCell.appendChild(deleteButton);
+                editCategoryCell.appendChild(editButton);
+
+
             // Append cells to row
             row.appendChild(categoryNameCell);
             row.appendChild(totalAmountCell);
+            row.appendChild(deleteCategoryCell);
+            row.appendChild(editCategoryCell);
 
             // Append row to table body
             categoriesTableBody.appendChild(row);
