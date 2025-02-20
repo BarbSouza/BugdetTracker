@@ -28,4 +28,6 @@ routes.get("/getWalletsTotals", userControllers.getWalletsTotals);
 
 routes.get("/getCategoriesTotals", userControllers.getCategoriesTotals);
 
+routes.put("/transactions/:id", userControllers.editTransaction);
+
 module.exports = routes;

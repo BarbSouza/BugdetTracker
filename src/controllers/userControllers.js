@@ -186,6 +186,35 @@ const getCategoriesTotals = (req, res) => {
     });
 };
 
+const editTransaction = (req, res) => {
+    const transactionID = req.params.id;
+    const { date, type, wallet_id, category_id, description, amount } = req.body;
+
+    if (!amount || !type || !wallet_id || !category_id || !date) {
+        return res.status(400).json({ error: "All fields are required!" });
+    }
+
+    const query = `
+        UPDATE Transactions 
+        SET date = ?, type = ?, wallet_id = ?, category_id = ?, description = ?, amount = ?
+        WHERE transaction_id = ?
+    `;
+
+    connection.query(query, [date, type, wallet_id, category_id, description, amount, transactionID], (err, result) => {
+        if (err) {
+            console.error("Error updating transaction:", err);
+            return res.status(500).json({ error: "Error updating transaction" });
+        }
+
+        if (result.affectedRows === 0) {
+            return res.status(404).json({ error: "Transaction not found" });
+        }
+
+        res.status(200).json({ message: "Transaction updated successfully!" });
+    });
+};
+
+
 module.exports = {
     form,
     addTransaction,
@@ -198,5 +227,6 @@ module.exports = {
     deleteWallet,
     deleteCategory,
     getWalletsTotals,
-    getCategoriesTotals
+    getCategoriesTotals,
+    editTransaction
 };
